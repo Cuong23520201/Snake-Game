@@ -38,8 +38,22 @@ void clearScreen() {
 
 void run()
 {
+    initMap();
+    running = true;
+    while (running) {
+        if (_kbhit()) {
+            changeDirection(_getch());
+        }
+        update();
+        clearScreen();
+        printMap();
+        Sleep(400);
+    }
 
+    cout << "\t\tGame Over!" << endl << "\t\tYour score is: " << food;
+    cin.ignore();
 }
+
 void changeDirection(char key) {
     switch (key) {
     case 72: // Mũi tên lên
@@ -56,8 +70,6 @@ void changeDirection(char key) {
         break;
     }
 }
-
-
 
 
 // Di chuyển con rắn và xử lý logic khi gặp thức ăn
