@@ -25,6 +25,7 @@ int headypos;
 int direction;
 int food = 0;
 bool running;
+int speed;
 
 int main()
 {
@@ -41,6 +42,29 @@ void run()
     cout << "\t\tPress Enter to start" << endl;
     while (_getch() != 13) { 
     }
+    // Hiển thị menu chọn độ khó
+    cout << "\t\tSelect Difficulty:" << endl;
+    cout << "\t\t1. Easy" << endl;
+    cout << "\t\t2. Medium" << endl;
+    cout << "\t\t3. Hard" << endl;
+
+    char choice;
+    do {
+        choice = _getch(); 
+        switch (choice) {
+        case '1':
+            speed = 600; // Easy
+            break;
+        case '2':
+            speed = 400; // Medium
+            break;
+        case '3':
+            speed = 200; // Hard
+            break;
+        default:
+            cout << "\t\tInvalid choice! Please select 1, 2, or 3." << endl;
+        }
+    } while (choice < '1' || choice > '3');
     initMap();
     running = true;
     while (running) {
@@ -50,7 +74,7 @@ void run()
         update();
         clearScreen();
         printMap();
-        Sleep(400);
+        Sleep(speed);
     }
 
     cout << "\t\tGame Over!" << endl << "\t\tYour score is: " << food;
