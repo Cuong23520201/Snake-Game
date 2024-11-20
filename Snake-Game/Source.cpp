@@ -38,6 +38,9 @@ void clearScreen() {
 
 void run()
 {
+    cout << "\t\tPress Enter to start" << endl;
+    while (_getch() != 13) { 
+    }
     initMap();
     running = true;
     while (running) {
