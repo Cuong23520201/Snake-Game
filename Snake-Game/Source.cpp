@@ -13,6 +13,7 @@ void update();
 void changeDirection(char key);
 void clearScreen();
 void generateFood();
+void setTextColor(int color);
 
 char getMapValue(int value);
 
@@ -44,9 +45,13 @@ void run()
     }
     // Hiển thị menu chọn độ khó
     cout << "\t\tSelect Difficulty:" << endl;
+    setTextColor(10);
     cout << "\t\t1. Easy" << endl;
+    setTextColor(14);
     cout << "\t\t2. Medium" << endl;
+    setTextColor(12);
     cout << "\t\t3. Hard" << endl;
+    setTextColor(7);
 
     char choice;
     do {
@@ -172,7 +177,12 @@ void printMap() // In bản đồ ra màn hình
 {
     for (int x = 0; x < mapwidth; ++x) {
         for (int y = 0; y < mapheight; ++y) {
-            cout << getMapValue(map[x + y * mapwidth]);
+            int value = map[x + y * mapwidth];
+            if (value > 0) setTextColor(10);
+            else if (value == -1) setTextColor(13);
+            else if (value == -2) setTextColor(12);
+            else setTextColor(7);
+            cout << getMapValue(value);
         }
         cout << endl;
     }
@@ -187,4 +197,7 @@ char getMapValue(int value)
     case -2: return 'O';// Thức ăn
     }
     return ' ';// Ô trống
+}
+void setTextColor(int color) {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
